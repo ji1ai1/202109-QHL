@@ -4,8 +4,8 @@
 # python套件 pandas 1.2.2
 #
 # 输入：
-#   final_dataset_train.tsv
-#	 final_dataset_testA.tsv
+#  final_dataset_train.tsv
+#  final_dataset_testA.tsv
 #
 # 输出：
 # 	result.csv
