@@ -10,7 +10,7 @@
 # 输出：
 # 	result.csv
 #
-# 0.76957
+# 0.76
 #
 import lightgbm
 import numpy
@@ -57,7 +57,6 @@ for 甲 in ["antibody_seq_a", "antibody_seq_b", "antigen_seq"]:
 def 取得数据表(某表, 某基础特征表, 某特征表):
    某数据表 = 某表
    某数据表 = 某数据表.merge(某基础特征表, on="id", how="left")
-   某数据表 = 某数据表.merge(某特征表.统计特征("pdb", {"delta_g": ["mean", "median", "min", "max"]}).reset_index(), on="pdb", how="left")
    某数据表 = 某数据表.merge(某特征表.统计特征("antibody_seq_a", {"delta_g": ["mean", "median", "min", "max"]}).reset_index(), on="antibody_seq_a", how="left")
    某数据表 = 某数据表.merge(某特征表.统计特征("antibody_seq_b", {"delta_g": ["mean", "median", "min", "max"]}).reset_index(), on="antibody_seq_b", how="left")
    某数据表 = 某数据表.merge(某特征表.统计特征("antigen_seq", {"delta_g": ["mean", "median", "min", "max"]}).reset_index(), on="antigen_seq", how="left")
