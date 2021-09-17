@@ -10,7 +10,7 @@
 # 输出：
 # 	result.csv
 #
-# 0.76
+# 0.7852
 #
 import lightgbm
 import numpy
