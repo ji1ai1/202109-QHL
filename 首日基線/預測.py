@@ -23,7 +23,6 @@ def 統計特征(某表, 鍵, 統計字典, 前綴=""):
 	某統計表 = 某表.groupby(鍵).aggregate(統計字典)
 	某統計表.columns = ["%s%s之%s%s" % (前綴, "".join(鍵), 欄名, 丑 if isinstance(丑, str) else 丑.__name__) for 欄名, 函式 in 統計字典.items() for 丑 in (函式 if isinstance(函式, list) else [函式])]
 	return 某統計表
-pandas.DataFrame.統計特征 = 統計特征
 
 訓練表 = pandas.read_csv("final_dataset_train.tsv", sep="\t")
 訓練表["id"] = range(-1, -len(訓練表) -1, -1)
@@ -57,9 +56,9 @@ for 甲 in ["antibody_seq_a", "antibody_seq_b", "antigen_seq"]:
 def 取得資料表(某表, 某基礎特征表, 某特征表):
 	某資料表 = 某表
 	某資料表 = 某資料表.merge(某基礎特征表, on="id", how="left")
-	某資料表 = 某資料表.merge(某特征表.統計特征("antibody_seq_a", {"delta_g": ["mean", "median", "min", "max"]}).reset_index(), on="antibody_seq_a", how="left")
-	某資料表 = 某資料表.merge(某特征表.統計特征("antibody_seq_b", {"delta_g": ["mean", "median", "min", "max"]}).reset_index(), on="antibody_seq_b", how="left")
-	某資料表 = 某資料表.merge(某特征表.統計特征("antigen_seq", {"delta_g": ["mean", "median", "min", "max"]}).reset_index(), on="antigen_seq", how="left")
+	某資料表 = 某資料表.merge(統計特征(某特征表, "antibody_seq_a", {"delta_g": ["mean", "median", "min", "max"]}).reset_index(), on="antibody_seq_a", how="left")
+	某資料表 = 某資料表.merge(統計特征(某特征表, "antibody_seq_b", {"delta_g": ["mean", "median", "min", "max"]}).reset_index(), on="antibody_seq_b", how="left")
+	某資料表 = 某資料表.merge(統計特征(某特征表, "antigen_seq", {"delta_g": ["mean", "median", "min", "max"]}).reset_index(), on="antigen_seq", how="left")
 	某資料表 = 某資料表.drop(["pdb", "antibody_seq_a", "antibody_seq_b", "antigen_seq"], axis=1)
 	
 	某資料表["標籤"] = 某資料表.delta_g.rank()
